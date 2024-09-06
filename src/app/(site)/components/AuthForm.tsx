@@ -1,5 +1,6 @@
 'use client';
 
+import Button from '@/components/Button';
 import Input from '@/components/Input';
 import React, { useCallback, useState } from 'react';
 
@@ -37,35 +38,56 @@ export default function AuthForm() {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Input
-                    id="email"
-                    label="Email:"
-                    register={register}
-                    errors={errors}
-                ></Input>
-                <Input
-                    id="Username"
-                    label="Username:"
-                    register={register}
-                    errors={errors}
-                ></Input>
+        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md  ">
+            <div className="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
+                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                    {variant === 'REGISTER' && (
+                        <Input
+                            disabled={isLoading}
+                            id="email"
+                            label="Email Address:"
+                            register={register}
+                            errors={errors}
+                        ></Input>
+                    )}
 
-                <Input
-                    id="Password"
-                    label="Password:"
-                    register={register}
-                    errors={errors}
-                ></Input>
+                    <Input
+                        disabled={isLoading}
+                        id="Username"
+                        label="Username:"
+                        register={register}
+                        errors={errors}
+                    ></Input>
 
-                <button
-                    className="inner-block px-4 py-2 rounded-md text-blue-400 bg-blue-500 mt-4 text-whtie"
-                    type="submit"
-                >
-                    submit login
-                </button>
-            </form>
+                    <Input
+                        disabled={isLoading}
+                        id="Password"
+                        label="Password:"
+                        register={register}
+                        errors={errors}
+                    ></Input>
+
+                    <div className="mt-6">
+                        <Button type="submit" fullWidth disabled={isLoading}>
+                            {variant === 'LOGIN' ? 'Sign in' : 'Register'}
+                        </Button>
+                    </div>
+                </form>
+
+                <div className="mt-6">
+                    <div className="relative">
+                        <div className="flex items-center absolute inset-0">
+                            <div className="w-full border-t border-gray-300"></div>
+                        </div>
+
+                        <div className="relative text-sm flex justify-center">
+                            <span className="px-2 bg-white text-gray-500">
+                                or Continue with
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
